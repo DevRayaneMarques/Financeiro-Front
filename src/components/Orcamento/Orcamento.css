@@ -1,0 +1,135 @@
+.budget-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-right: 10px;
+
+}
+
+label {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+input[type="number"] {
+    font-size: 24px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    color: #181616;
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+li label {
+    margin-right: 10px;
+}
+
+button {
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #c0c1c3;
+    color: #000000;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid #ccc;
+    margin: 20px 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.card p {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card button {
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #ac3636;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.card button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input-cell input {
+    width: 50%;
+    height: 50px;
+}
+
+.white-bg-btn {
+    background-color: white;
+    color: black;
+}
+
+.black-border {
+    border: 1px solid black;
+}
+.category-cell {
+    background-color: #f5f5f5;
+}
