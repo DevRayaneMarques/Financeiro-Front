@@ -80,10 +80,11 @@ export function App() {
     // Atualiza as transações no localStorage
     localStorage.setItem("transactions", JSON.stringify(newArrayTransactions));
   };
-
+ 
   useEffect(() => {
     const fetchDados = async () => {
       const response = await getDados();
+      console.log(response);
       setDados(response);
     };
 
@@ -93,9 +94,9 @@ export function App() {
   return (
     <>
     <div>
-      {dados.map((item) => (
-        <p key={item.id}>{item.nome}</p>
-      ))}
+    {dados && dados.map((item) => (
+  <p key={item.id}>{item.nome}</p>
+))}
    
       <UserNameContext.Provider value={dataUserName}>
         <UserEmailContext.Provider value={dataUserEmail}>

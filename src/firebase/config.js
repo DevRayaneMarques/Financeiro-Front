@@ -4,13 +4,12 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBNeAwsdnGM5D5xGudzoLEqo5q4FYtOxg8",
-  authDomain: "financeiro-80b94.firebaseapp.com",
-  databaseURL: "https://financeiro-80b94-default-rtdb.firebaseio.com",
-  projectId: "financeiro-80b94",
-  storageBucket: "financeiro-80b94.appspot.com",
-  messagingSenderId: "1024932717226",
-  appId: "1:1024932717226:web:38e8086ba59585e91be6d3"
+  apiKey: "AIzaSyBYr7z83uDtM4hpwi9c3t5gqo5NR6Ibu5U",
+  authDomain: "financeiro-28598.firebaseapp.com",
+  projectId: "financeiro-28598",
+  storageBucket: "financeiro-28598.appspot.com",
+  messagingSenderId: "302650726660",
+  appId: "1:302650726660:web:4800468b58c3b368661851"
 };
 
 

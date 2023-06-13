@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/https//github.com/DevRayaneMarques/Gerenciamento-Back.git'
+  baseURL: 'https://api.github.com/repos/DevRayaneMarques/Gerenciamento-Back'
 });
 
 export const getDados = async () => {
