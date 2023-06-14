@@ -5,20 +5,20 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.jpg";
+import googleIcon from "../../assets/icons/google-white.svg";
 import { InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Google } from "react-bootstrap-icons";
 import {
   loginEmailSenha,
-  loginGoogle
-} from "../../firebase/auth";
+  loginGoogle,
+  } from "../../firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import "./Login.css";
-
+import backgroundImage from "../../assets/images/logo.jpg";
 
 export function Login() {
   const {
@@ -27,20 +27,19 @@ export function Login() {
     formState: { errors },
   } = useForm();
 
+  const styles = {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "100vh",
+    width: "100vw",
+  };
 
   const navigate = useNavigate();
   const [mostrarSenhaV, SetMostrarSenha] = useState(false);
-  
-
-  function entrarSemLogin () {
-
-    navigate("/")
-  }
 
   function onSubmit(data) {
     const { email, senha } = data;
-    if (email && senha) {
-      // Se o email e senha estiverem preenchidos, será feito o ligin normal.
     loginEmailSenha(email, senha)
       .then((user) => {
         toast.success(`Bem-vindo(a) ${user.email}`, {
@@ -55,12 +54,7 @@ export function Login() {
           duration: 2500,
         });
       });
-    } else {
-      // Se o email e senha estiverem vazios, será permitido o acesso sem login.
-      entrarSemLogin();
-    }
   }
-
   function onLoginGoogle() {
     // then = quando der certo o processo
     loginGoogle()
@@ -90,24 +84,18 @@ export function Login() {
   if (usuarioLogado !== null) {
     navigate("/");
   }
-  
-
   return (
     <>
-      <div className="d-flex flex-wrap justify-content-around gap-4 p-4 login">
-          <div className="logo-container">
-            <img src={logo} width="400"
-            alt="Logo do app" />
-            <div className="justify-content-start d-flex text-start" >
-            </div>
-          </div>
+      <div className="d-flex flex-wrap justify-content-around gap-4 p-4" style={styles}>
+          <div className="align-self-center"><img src={logo} width="300" alt="Logo do app" /></div>
             <div className="align-self-center">
-              <Card className="text-center p-2">
+              <Card className="text-center p-4">
               <Card.Title id="Text" className="text-center"></Card.Title>
-
-
-              <Form className="align-items-center"
-              onSubmit={handleSubmit(onSubmit)}>
+              <h4>Faça parte da nossa plataforma</h4>
+              <p className="text-muted">
+                Não tem conta? <Link to="/cadastro">Cadastre-se</Link>
+              </p>
+              <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group
                   className="organizer"
                   type="password"
@@ -116,9 +104,7 @@ export function Login() {
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
-                    className={`${
-                      errors.email && "is-invalid"
-                    } email-input`} // Adicione a classe 'email-input' aqui
+                    className={errors.email && "is-invalid"}
                     placeholder="Seu email"
                     {...register("email", {
                       required: "O email é obrigatório",
@@ -130,7 +116,6 @@ export function Login() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="password">
                   <Form.Label>Senha</Form.Label>
-
                   <InputGroup>
                     <Form.Control
                       type={mostrarSenhaV ? "text" : "password"}
@@ -143,7 +128,7 @@ export function Login() {
                     />
                     <InputGroup.Text>
                       <a
-                        className="mostrarSenha mt-1 mx-1"
+                        className="mostrarSenha mt-3 mx-1"
                         onClick={mostrarSenha}
                       >
                         <i
@@ -158,14 +143,8 @@ export function Login() {
                     {errors.senha?.message}
                   </Form.Text>
                 </Form.Group>
-                <p className="text-muted">
-                <p className="text-muted">
-          <Link to="/esqueci-minha-senha">Esqueci minha Senha</Link>
-        </p>
-                Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
-              </p>
 
-                <Card className={`button-login`}>
+                <Card className="button-login">
                   <Button type="submit" variant="success">
                     Login
                   </Button>
@@ -176,7 +155,7 @@ export function Login() {
                     variant="danger"
                     onClick={onLoginGoogle}
                   >
-                    <Google size={28}  /> Entrar
+                    <img src={googleIcon} width="30" alt="Google icon" /> Entrar
                     com o Google
                   </Button>
 

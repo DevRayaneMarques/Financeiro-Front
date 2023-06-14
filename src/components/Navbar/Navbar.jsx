@@ -6,80 +6,58 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../../assets/images/logo-cadastro.jpg";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout, semFotoPerfil } from "../../firebase/auth";
+import { logout } from "../../firebase/auth";
 import { AuthContext } from "../../contexts/AuthContext";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
-import {
-  ChatSquareTextFill,
-  PersonFill,
-} from "react-bootstrap-icons";
-import { UserNameContext } from "../../contexts/UserContext";
-import { UserPhotoContext } from "../../contexts/UserPhotoContext";
-import { getUser } from "../../firebase/usuarios";
-import { IdContext } from "../../contexts/IdContext";
-
-const LOCAL_STORAGE_KEY = "myApp";
+import { semFotoPerfil } from "../../firebase/auth"; 
 
 export default function NavBar() {
   const navigate = useNavigate();
   const usuarioLogado = useContext(AuthContext);
-  const userId = useContext(IdContext);
   const [fotoPerfil, setFotoPerfil] = useState(semFotoPerfil);
-  const dataUserName = useContext(UserNameContext);
-  const [temaEscuro, setTemaEscuro] = useContext(DarkModeContext);
-  const semUsuario = "Usuário anônimo";
-  const [usuario, setUsuario] = useState(semUsuario);
+  const LOCAL_STORAGE_KEY = "myApp";
+ const semUsuario = "Usuário anônimo"
+  const [usuario, setUsuario] = useState(semUsuario);  
   const [showDropdown, setShowDropdown] = useState(false);
-  const primeiroNome = usuario.split(" ")[0];
-  const userPhoto = usuarioLogado ? usuarioLogado.userPhoto : null;
+  const primeiroNome = usuario.split(' ')[0];
 
-  useEffect(() => {
-    if (usuarioLogado !== null) {
-      if (userPhoto !== null) {
-        setUsuario(dataUserName !== null ? dataUserName : semUsuario);
+
+useEffect(() => {
+    // Se o usuário estiver logado, usa a foto de perfil dele
+    if (usuarioLogado !== null && usuarioLogado.photoURL !== null) {
+      setFotoPerfil(usuarioLogado.photoURL);
+      setUsuario(usuarioLogado.displayName)
+      if (usuarioLogado.displayName !== null) {
+        setUsuario(usuarioLogado.displayName)
       } else {
-        setUsuario(dataUserName !== null ? dataUserName : semUsuario);
+        setUsuario(semUsuario)
       }
-    } else {
-      setUsuario(semUsuario);
-
     }
-  }, [usuarioLogado, userPhoto, dataUserName]);
+    if (usuarioLogado !== null && usuarioLogado.photoURL === null) {
+      setFotoPerfil(semFotoPerfil);
+      setUsuario(usuarioLogado.displayName)
+      if (usuarioLogado.displayName !== null) {
+        setUsuario(usuarioLogado.displayName)
+      } else {
+        setUsuario(semUsuario)
+      };
+    }
+    // Se o usuário não estiver logado, usa o avatar padrão
+    else {
+      setFotoPerfil(semFotoPerfil);
+      
+    }
+  }, [usuarioLogado]);
 
-  // useEffect(() => {
-  //   getUser(userId)
-  //     .then((user) => {
-  //       if (user) {
-  //         if (usuarioLogado !== null && userPhoto !== null) {
-  //           setFotoPerfil(user.photoURL || semFotoPerfil);
-  //           setUsuario(user.name || semUsuario);
-  //         } else {
-  //           setFotoPerfil(semFotoPerfil);
-  //           setUsuario(user.name || semUsuario);
-  //         }
-  //       } else {
-  //         setFotoPerfil(semFotoPerfil);
-  //       }
-
-  //     })
-  //     .catch((error) => {
-  //       console.error("Erro ao buscar dados do usuário:", error);
-  //     });
-  // }, [usuarioLogado, userPhoto, userId]);
-  
-  
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-
-    if (data) {
-      setTemaEscuro(data.temaEscuro);
-    }
-  }, [setTemaEscuro]);
-
+  
+  });
+  
   useEffect(() => {
-    const data = { temaEscuro, usuario };
+    const data = {usuario };
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-  }, [temaEscuro, usuario]);
+  }, [usuario]);
+  
 
   function onLogout() {
     logout().then(() => {
@@ -87,92 +65,71 @@ export default function NavBar() {
     });
   }
 
-  function mudarTema() {
-    setTemaEscuro((prevTemaEscuro) => !prevTemaEscuro);
-  }
+  
+  
+
+  //   if (temaEscuro === true) {
+  //     setTemaEscuro(false);
+  //   }
+  // }
 
   function toggleDropdown() {
-    setShowDropdown((prevShowDropdown) => !prevShowDropdown);
+    setShowDropdown((prevShowDropdown)=>!prevShowDropdown);
   }
 
-  return (
-    <div>
-      <Navbar
-        collapseOnSelect
-        expand="lg"
-        bg={temaEscuro ? "dark" : "light"}
-        variant={temaEscuro ? "dark" : "light"}
-        className={temaEscuro ? "bg-dark" : ""}
-      >
-        <Container>
-          <Navbar.Brand
-            as={NavLink}
-            to="/"
-            className={temaEscuro ? "text-white" : ""}
-          >
-            <img
-              src={temaEscuro ? logo : logo}
-              height="30"
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-            />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto"></Nav>
-            <div className="welcome-container ms-auto">
-              <i
-                className={
-                  temaEscuro
-                    ? "bi bi-chat-left-heart-fill text-white"
-                    : "bi bi-chat-left-heart-fill"
-                }
-              ></i>
-              <h6 className={temaEscuro ? "text-white" : ""}>
-                Bem vindo(a), {primeiroNome}!
-              </h6>
-            </div>
-            <Nav>
-              <NavDropdown
-                id="perfil-dropdown"
-                title={
-                  <img
-                    src={userPhoto}
-                    width="32"
-                    height="32"
-                    alt="fotoPerfil"
-                    className="rounded-circle fotoPerfil"
-                    id="fotoPerfil"
-                  />
-                }
-                menuVariant={temaEscuro ? "dark" : "light"}
-                className="ml-auto mt-auto"
-                align="end"
-                show={showDropdown}
-                onToggle={toggleDropdown}
-                drop="center"
-              >
-                <NavDropdown.Item id="/perfil">
-                  <img
-                    src={userPhoto}
-                    width="32"
-                    height="32"
-                    alt="fotoPerfil"
-                    className="rounded-circle fotoPerfil"
-                    id="fotoPerfil"
-                  />
-                  <h6>{usuario}</h6>
-                </NavDropdown.Item>
-
-                {usuarioLogado && <></>}
-                <NavDropdown.Item onClick={onLogout}>
-                  <i className="bi bi-box-arrow-right"></i>
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+return (
+<Navbar collapseOnSelect expand="lg">
+    <Container>
+    <Navbar.Brand as={NavLink} to="/" className={'text-white'}>
+      <img src={logo} height="30" 
+      className="d-inline-block align-top" alt="React Bootstrap logo" 
+      />
+    </Navbar.Brand>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+    <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="me-auto">
+      
+        
+      </Nav>
+        <div className='welcome-container ms-auto'>
+        <i className={"bi bi-chat-left-heart-fill text-white"}></i>
+        <h6 className={'text-white'}>
+        Olá, {primeiroNome}!</h6>
+        </div>
+        <Nav>
+            <NavDropdown
+              id="perfil-dropdown"
+              title={
+                <img
+                  src={fotoPerfil}
+                  width="32"
+                  alt="fotoPerfil"
+                  className="rounded-circle"
+                  id="fotoPerfil"
+                />
+              }
+              className="ml-auto mt-auto"
+              align="end"
+              show={showDropdown}
+              onToggle={toggleDropdown}
+              drop="center" >
+              <NavDropdown.Item id="/perfil">
+                <img
+                  src={fotoPerfil}
+                  width="32"
+                  alt="fotoPerfil"
+                  className="rounded-circle me-2"
+                  id="fotoPerfil"
+                />
+                <h6>{usuario}</h6>
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={onLogout}>
+              <i className="bi bi-box-arrow-right"></i>
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }

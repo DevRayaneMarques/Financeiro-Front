@@ -4,7 +4,7 @@ import { Root } from "./pages/Root/Root";
 import { AuthContext } from "./contexts/AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
-import { Login } from "./pages/Login/Login";
+import { Login }  from "./pages/Login/Login";
 import { Cadastro } from "./pages/Cadastro/Cadastro";
 import { NotFound } from "./pages/NotsFound/NotFound";
 import "./global.css";
@@ -15,7 +15,7 @@ import { ResetPassword } from './components/EsqueciMinhaSenha/EsqueciMinhaSenha'
 import NavBar from "./components/Navbar/Navbar";
 import TransactionForm from "./components/TransactionForm/TransactionForm";
 import Orcamento from "./components/Orcamento/Orcamento";
-import { getDados } from "../src/Service/api";
+
 
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
@@ -81,15 +81,6 @@ export function App() {
     localStorage.setItem("transactions", JSON.stringify(newArrayTransactions));
   };
  
-  useEffect(() => {
-    const fetchDados = async () => {
-      const response = await getDados();
-      console.log(response);
-      setDados(response);
-    };
-
-    fetchDados();
-  }, []);
 
   return (
     <>
