@@ -1,135 +1,132 @@
-.budget-container {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+    outline: none;
+}
+
+body {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    margin: 20px;
 }
 
-h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-
-}
-
-form {
+main {
+    max-width: 550px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-    margin-right: 10px;
-
+    align-items: center;
 }
 
-label {
-    font-size: 24px;
-    margin-bottom: 10px;
+.resume {
+    display: flex;
+    padding: 10px 0;
+    gap: 40px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-input[type="number"] {
-    font-size: 24px;
+.resume>div {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 10px;
     padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 2px solid #ccc;
-
+    width: 150px;
 }
 
-ul {
-    list-style: none;
+.newItem {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-bottom: 20px;
-    color: #181616;
-}
-
-li {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-li label {
-    margin-right: 10px;
-}
-
-button {
-    font-size: 24px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: #c0c1c3;
-    color: #000000;
-    cursor: pointer;
-    margin-bottom: 30px;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-hr {
-    border: none;
-    border-top: 2px solid #ccc;
-    margin: 20px 0;
-}
-
-.card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.card h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.card p {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.card button {
-    font-size: 24px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: #007bff;
-    color: #ac3636;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-.card button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.card-container {
-    display: flex;
-    flex-direction: column;
+    gap: 10px;
+    align-items: end;
+    width: 100%;
     justify-content: center;
-    align-items: center;
-}
-.input-cell input {
-    width: 50%;
-    height: 50px;
+    flex-wrap: wrap;
 }
 
-.white-bg-btn {
-    background-color: white;
+.divDesc,
+.divType,
+.divAmount {
+    display: flex;
+    flex-direction: column;
+}
+
+.newItem>button {
+    background-color: #2C73D2;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 34px;
+}
+
+input,
+select {
+    padding: 5px;
+}
+
+.divTable {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 98%;
+    padding: 20px 0;
+    border-radius: 5px;
+}
+
+th {
+    text-align: start;
+    border-bottom: inset;
+    padding-bottom: 5px;
+}
+
+i {
+    font-size: 25px;
+}
+
+.bxs-chevron-up-circle {
+    color: #00C9A7;
+}
+
+.bxs-chevron-down-circle {
+    color: #D83121;
+}
+
+.columnAction {
+    width: 40px;
+    text-align: center;
+}
+
+.columnAction>button {
+    background: transparent;
+    border: none;
+}
+
+.columnAmount {
+    width: 30%;
+}
+
+.columnType {
+    width: 80px;
+    text-align: center;
+    
+}
+
+.text-success {
+    color: green;
+}
+
+.text-danger {
+    color: red;
+}
+
+.black-text {
     color: black;
-}
-
-.black-border {
-    border: 1px solid black;
-}
-.category-cell {
-    background-color: #f5f5f5;
 }

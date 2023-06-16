@@ -13,7 +13,6 @@ import { getUser } from "./firebase/usuarios";
 import { UserEmailContext, UserNameContext } from "./contexts/UserContext";
 import { ResetPassword } from './components/EsqueciMinhaSenha/EsqueciMinhaSenha';
 import NavBar from "./components/Navbar/Navbar";
-import TransactionForm from "./components/TransactionForm/TransactionForm";
 import Orcamento from "./components/Orcamento/Orcamento";
 
 
@@ -98,10 +97,6 @@ export function App() {
                     <Route path="/" element={<Root />} />
                     <Route path="navBar" element={<NavBar />} />
                     
-                    <Route
-                      path="/transacao"
-                      element={<TransactionForm onAddTransaction={handleAddTransaction} />}
-                    />
                     <Route path="/orcamento" element={<Orcamento/>} />
                     <Route path="*" element={<NotFound />} />
                     <Route path="/login" element={<Login />} />

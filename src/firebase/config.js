@@ -4,12 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBYr7z83uDtM4hpwi9c3t5gqo5NR6Ibu5U",
-  authDomain: "financeiro-28598.firebaseapp.com",
-  projectId: "financeiro-28598",
-  storageBucket: "financeiro-28598.appspot.com",
-  messagingSenderId: "302650726660",
-  appId: "1:302650726660:web:4800468b58c3b368661851"
+  apiKey: "AIzaSyBhBeLH_Zr6NGxjrKhheIulO5alH2vxP5M",
+  authDomain: "gerenciamento-financeiro-ade0e.firebaseapp.com",
+  projectId: "gerenciamento-financeiro-ade0e",
+  storageBucket: "gerenciamento-financeiro-ade0e.appspot.com",
+  messagingSenderId: "152333003783",
+  appId: "1:152333003783:web:0da70b21bcaa940dbf8ea2",
+  measurementId: "G-WJGHHFH6SD"
 };
 
 

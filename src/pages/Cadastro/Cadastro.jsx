@@ -15,7 +15,6 @@ import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import logo from "../../assets/images/logo-cadastro.jpg";
 import "./Cadastro.css";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
 
 
 export function Cadastro() {
@@ -29,7 +28,7 @@ export function Cadastro() {
 
   const navigate = useNavigate();
   const [mostrarSenhaV, setMostrarSenha] = useState(false);
-  const [temaEscuro] = useContext(DarkModeContext);
+  
 
 
   function entrarSemCadastro () {
@@ -92,7 +91,6 @@ export function Cadastro() {
     navigate("/");
   }
 
-  const themeClass = temaEscuro ? 'dark' : 'light';
   
   return (
     <>
@@ -167,7 +165,7 @@ export function Cadastro() {
                 Junte-se a nós <Link to="/login" ><i className="bi bi-person-plus-fill bi-4x"></i></Link>
               </p>
 
-              <Card className={`button-login ${themeClass}`}>
+              <Card className={`button-login`}>
                   <Button type="submit" variant="success">
                     Login
                   </Button>
