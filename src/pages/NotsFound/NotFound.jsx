@@ -20,7 +20,7 @@ export function NotFound() {
       <br />
       <ButtonGroup size="lg" className="mb-2">
         <Button variant="secondary" onClick={() => navegarHome("/")}>
-          Home
+          Orçamento
         </Button>
         <Button variant="dark" onClick={() => navegarLogin("/login")}>
           Login
