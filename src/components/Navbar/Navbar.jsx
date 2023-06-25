@@ -15,49 +15,42 @@ export default function NavBar() {
   const usuarioLogado = useContext(AuthContext);
   const [fotoPerfil, setFotoPerfil] = useState(semFotoPerfil);
   const LOCAL_STORAGE_KEY = "myApp";
- const semUsuario = "Usuário anônimo"
+  const semUsuario = "Usuário anônimo";
   const [usuario, setUsuario] = useState(semUsuario);  
   const [showDropdown, setShowDropdown] = useState(false);
   const primeiroNome = usuario.split(' ')[0];
+  const mostrarNavbar = true; // Defina como `false` na página de login e cadastro
 
-
-useEffect(() => {
+  useEffect(() => {
     // Se o usuário estiver logado, usa a foto de perfil dele
     if (usuarioLogado !== null && usuarioLogado.photoURL !== null) {
       setFotoPerfil(usuarioLogado.photoURL);
-      setUsuario(usuarioLogado.displayName)
+      setUsuario(usuarioLogado.displayName);
       if (usuarioLogado.displayName !== null) {
-        setUsuario(usuarioLogado.displayName)
+        setUsuario(usuarioLogado.displayName);
       } else {
-        setUsuario(semUsuario)
+        setUsuario(semUsuario);
       }
     }
     if (usuarioLogado !== null && usuarioLogado.photoURL === null) {
       setFotoPerfil(semFotoPerfil);
-      setUsuario(usuarioLogado.displayName)
+      setUsuario(usuarioLogado.displayName);
       if (usuarioLogado.displayName !== null) {
-        setUsuario(usuarioLogado.displayName)
+        setUsuario(usuarioLogado.displayName);
       } else {
-        setUsuario(semUsuario)
-      };
+        setUsuario(semUsuario);
+      }
     }
     // Se o usuário não estiver logado, usa o avatar padrão
     else {
       setFotoPerfil(semFotoPerfil);
-      
     }
   }, [usuarioLogado]);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-  
-  });
-  
-  useEffect(() => {
-    const data = {usuario };
+    const data = { usuario };
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
   }, [usuario]);
-  
 
   function onLogout() {
     logout().then(() => {
@@ -65,38 +58,35 @@ useEffect(() => {
     });
   }
 
-  
-  
-
-  //   if (temaEscuro === true) {
-  //     setTemaEscuro(false);
-  //   }
-  // }
-
   function toggleDropdown() {
-    setShowDropdown((prevShowDropdown)=>!prevShowDropdown);
+    setShowDropdown((prevShowDropdown) => !prevShowDropdown);
   }
 
-return (
-<Navbar collapseOnSelect expand="lg">
-    <Container>
-    <Navbar.Brand as={NavLink} to="/" className={'text-white'}>
-      <img src={logo} height="30" 
-      className="d-inline-block align-top" alt="React Bootstrap logo" 
-      />
-    </Navbar.Brand>
-    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-    <Navbar.Collapse id="responsive-navbar-nav">
-      <Nav className="me-auto">
-      
-        
-      </Nav>
-        <div className='welcome-container ms-auto'>
-        <i className={"bi bi-chat-left-heart-fill text-white"}></i>
-        <h6 className={'text-white'}>
-        Olá, {primeiroNome}!</h6>
-        </div>
-        <Nav>
+  if (!mostrarNavbar) {
+    return null; // Retorna nulo para não exibir a barra de navegação
+  }
+
+  return (
+    <Navbar collapseOnSelect expand="lg">
+      <Container>
+        <Navbar.Brand as={NavLink} to="/" className={'text-white'}>
+          <img
+            src={logo}
+            height="30"
+            className="d-inline-block align-top"
+            alt="React Bootstrap logo"
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto"></Nav>
+          <div className='welcome-container ms-auto'>
+            <i className={"bi bi-chat-left-heart-fill text-white"}></i>
+            <h6 className={'text-white'}>
+              Olá, {primeiroNome}!
+            </h6>
+          </div>
+          <Nav>
             <NavDropdown
               id="perfil-dropdown"
               title={
@@ -112,7 +102,8 @@ return (
               align="end"
               show={showDropdown}
               onToggle={toggleDropdown}
-              drop="center" >
+              drop="center"
+            >
               <NavDropdown.Item id="/perfil">
                 <img
                   src={fotoPerfil}
@@ -124,7 +115,7 @@ return (
                 <h6>{usuario}</h6>
               </NavDropdown.Item>
               <NavDropdown.Item onClick={onLogout}>
-              <i className="bi bi-box-arrow-right"></i>
+                <i className="bi bi-box-arrow-right"></i>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

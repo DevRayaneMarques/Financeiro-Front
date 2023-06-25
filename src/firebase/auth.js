@@ -17,6 +17,8 @@ import {doc, getDoc, setDoc } from "firebase/firestore";
   export async function cadastrarEmailSenha(email, senha) {
     // Indicar para o firebase que queremos cadastrar
     // um novo usuário utilizando email/senha
+
+    
     
   
     // Aguardando o resultado do Firebase

@@ -12,7 +12,6 @@ import { IdContext } from "./contexts/IdContext";
 import { getUser } from "./firebase/usuarios";
 import { UserEmailContext, UserNameContext } from "./contexts/UserContext";
 import { ResetPassword } from './components/EsqueciMinhaSenha/EsqueciMinhaSenha';
-import NavBar from "./components/Navbar/Navbar";
 import Orcamento from "./components/Orcamento/Orcamento";
 import Contas from "./pages/Conta/Conta";
 
@@ -86,7 +85,7 @@ export function App() {
     {dados && dados.map((item) => (
   <p key={item.id}>{item.nome}</p>
 ))}
-   
+    
       <UserNameContext.Provider value={dataUserName}>
         <UserEmailContext.Provider value={dataUserEmail}>
           <AuthContext.Provider value={usuarioLogado}>
@@ -95,11 +94,11 @@ export function App() {
                   <Routes>
                   <Route path="/" element={<Root />}>
                 <Route index element={<Login />} />
-                   <Route path="navBar" element={<NavBar />} />
                     <Route path="contas" element={<Contas />} />
                     
                     <Route path="/orcamento" element={<Orcamento/>} />
                     <Route path="*" element={<NotFound />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/esqueci-minha-senha" element={<ResetPassword />} />
                     </Route>

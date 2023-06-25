@@ -1,10 +1,12 @@
 .Login.githubIcon {
+  border: none !important;
   background-color: #0e0e0f  !important;
 
 
 }
 .Login.btnLogin {
   width: 250px !important;
+  border: none !important;
   height: 50px;
 }
 
@@ -13,13 +15,18 @@
   background-color: #0a0a0ae3 !important;
   
 } 
-  .login.body { /*Imagem de fundo da página*/ 
-  background-image: url("../../assets/images/logo.jpg");
+.login-wrapper { /*Imagem de fundo da página*/ 
+  background-image: url("../../assets/images/Login.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
     background-position: center;
+    height: 100vh;
+    width: 100vw;
   }
-.Login.text-center, h4, .text-muted {
+
+.Login.text-center,
+h4, 
+.text-muted {
   color: rgb(11, 11, 11);
 } /* Título da plataforma h4 */
 
@@ -34,15 +41,7 @@ font-size: 20px;
 }
 
 
-.line { /*linha do meio, da página de login */
-position: absolute;
-top: 50%;
-left: 50%;
-width: 1px;
-height: 50%;
-background-color: #f8f2f2;
-transform: translate(-50%, -50%);
-}
+
 .button-login { /*button login *//*Meche com todos os button*/
 display: flex;
 justify-content: center;
@@ -52,12 +51,13 @@ display: inline-block;
 margin-bottom: 20px;
 text-align: center;
 }
-.login-card2 { /*Todo o Card */
-float: right;
-width: 400px; /* ajuste a largura do card conforme necessário */
-margin-left: 600px; /* adicione uma margem à esquerda para separar o card do conteúdo principal */
+.login-card { /*Todo o Card */
+width: 310px; /* ajuste a largura do card conforme necessário */
 position: absolute;
-margin-top: 250px;
+top: 30%; /* Altere o valor aqui para mover o card para baixo */
+left: -50%;
+height: 70%;
+transform: translate(-50%, -50%);
 }
 .login.mb-3 { /*redes Sociais*/
 border: none; 
@@ -65,16 +65,22 @@ display: inline-block;
 text-align: center;
 font-size: 16px; 
 }
-.text-center1 { /*centralizar Logo */
-display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200vh;
-  position: absolute;
-}
+
 .mb-3.ms-2.githubIcon.btnLogin { /*button do github */
 background-color: #0e0e0f;
 }
 #button {
 box-shadow: 0px 0px 0px 3px rgba(40, 167, 69, 0.25);
+}
+.login-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-container {
+  position: relative;
+  top: -23%;
 }

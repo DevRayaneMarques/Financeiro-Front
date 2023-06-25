@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { Container } from "react-bootstrap";
 import NavBar from "../../components/Navbar/Navbar";
@@ -11,6 +11,7 @@ import { UserPhotoProvider } from "../../contexts/UserPhotoContext";
 export function Root() {
     return (
         <>  
+     
              <UserPhotoProvider>
             <NavBar />
             <Container style={{marginBottom: 100}}>

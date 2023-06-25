@@ -13,7 +13,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
-import logo from "../../assets/images/logo-cadastro.jpg";
+import logo from "../../assets/images/Imagem cadastro.jpeg";
 import "./Cadastro.css";
 
 

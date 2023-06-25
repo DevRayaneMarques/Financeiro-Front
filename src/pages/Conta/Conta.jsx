@@ -13,21 +13,43 @@ const Reminder = () => {
   const [emailSent, setEmailSent] = useState(false); // Variável de estado para controlar se o e-mail de lembrete foi enviado
 
   // Função para lidar com o envio do formulário
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Lógica para enviar lembrete por e-mail se estiver ativado
     if (emailReminder) {
-      sendEmailReminder(); // Chamada corrigida para a função sendEmailReminder()
+      try {
+        await sendEmailReminder(); // Chama a função sendEmailReminder() com await para aguardar o envio do e-mail
+        setEmailSent(true);
+      } catch (error) {
+        console.error('Erro ao enviar o e-mail:', error);
+      }
     }
   };
 
   // Função para enviar lembrete por e-mail
-  const sendEmailReminder = () => {
-    // Simulação de envio de e-mail com sucesso
-    setTimeout(() => {
-      setEmailSent(true);
-    }, 2000);
+  const sendEmailReminder = async () => {
+    const emailData = {
+      paymentDescription,
+      paymentAmount,
+      paymentDate,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/key=API_KEY/AIzaSyBYr7z83uDtM4hpwi9c3t5gqo5NR6Ibu5U', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao enviar o e-mail');
+      }
+    } catch (error) {
+      throw new Error('Erro ao enviar o e-mail');
+    }
   };
 
   return (
@@ -37,7 +59,7 @@ const Reminder = () => {
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="paymentDescription">Descrição do Pagamento:</label>
+              <label htmlFor="paymentDescription">Descrição:</label>
               <input
                 type="text"
                 id="paymentDescription"

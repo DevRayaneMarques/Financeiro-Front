@@ -4,7 +4,6 @@ import {
   Form,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.jpg";
 import googleIcon from "../../assets/icons/google-white.svg";
 import { InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -12,13 +11,13 @@ import {
   loginEmailSenha,
   loginGoogle,
   } from "../../firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Route } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import "./Login.css";
-import backgroundImage from "../../assets/images/logo.jpg";
+import backgroundImage from "../../assets/images/Login.jpeg";
 
 export function Login() {
   const {
@@ -86,8 +85,6 @@ export function Login() {
   }
   return (
     <>
-      <div className="d-flex flex-wrap justify-content-around gap-4 p-4" style={styles}>
-          <div className="align-self-center"><img src={logo} width="300" alt="Logo do app" /></div>
             <div className="align-self-center">
               <Card className="text-center p-4">
               <Card.Title id="Text" className="text-center"></Card.Title>
@@ -143,7 +140,9 @@ export function Login() {
                     {errors.senha?.message}
                   </Form.Text>
                 </Form.Group>
-
+                <p className="text-muted">
+          <Link to="/esqueci-minha-senha">Esqueci minha Senha</Link>
+        </p>
                 <Card className="button-login">
                   <Button type="submit" variant="success">
                     Login
@@ -162,7 +161,7 @@ export function Login() {
                 </Card>
               </Form>
             </Card></div>
-          </div>
+         
           <Toaster />
 
     </>
