@@ -16,7 +16,7 @@ function Footer() {
       }}
     >
       <div className="container text-center">
-        <small>&copy; 2021 Finance</small>
+        <small>&copy; 2023 FinanceCode </small>
       </div>
     </footer>
   );

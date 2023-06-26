@@ -3,54 +3,35 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import logo from "../../assets/images/logo-cadastro.jpg";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout } from "../../firebase/auth";
+import { logout} from "../../firebase/auth";
 import { AuthContext } from "../../contexts/AuthContext";
-import { semFotoPerfil } from "../../firebase/auth"; 
+import { UserNameContext } from "../../contexts/UserContext";
 
 export default function NavBar() {
   const navigate = useNavigate();
   const usuarioLogado = useContext(AuthContext);
-  const [fotoPerfil, setFotoPerfil] = useState(semFotoPerfil);
-  const LOCAL_STORAGE_KEY = "myApp";
+  const dataUserName = useContext(UserNameContext);
   const semUsuario = "Usuário anônimo";
-  const [usuario, setUsuario] = useState(semUsuario);  
+  const [usuario, setUsuario] = useState(semUsuario);
   const [showDropdown, setShowDropdown] = useState(false);
-  const primeiroNome = usuario.split(' ')[0];
-  const mostrarNavbar = true; // Defina como `false` na página de login e cadastro
+  const primeiroNome = usuario.split(" ")[0];
+  const userPhoto = usuarioLogado ? usuarioLogado.userPhoto : null;
 
   useEffect(() => {
-    // Se o usuário estiver logado, usa a foto de perfil dele
-    if (usuarioLogado !== null && usuarioLogado.photoURL !== null) {
-      setFotoPerfil(usuarioLogado.photoURL);
-      setUsuario(usuarioLogado.displayName);
-      if (usuarioLogado.displayName !== null) {
-        setUsuario(usuarioLogado.displayName);
+    if (usuarioLogado !== null) {
+      if (userPhoto !== null) {
+        setUsuario(dataUserName !== null ? dataUserName : semUsuario);
       } else {
-        setUsuario(semUsuario);
+        setUsuario(dataUserName !== null ? dataUserName : semUsuario);
       }
+    } else {
+      setUsuario(semUsuario);
     }
-    if (usuarioLogado !== null && usuarioLogado.photoURL === null) {
-      setFotoPerfil(semFotoPerfil);
-      setUsuario(usuarioLogado.displayName);
-      if (usuarioLogado.displayName !== null) {
-        setUsuario(usuarioLogado.displayName);
-      } else {
-        setUsuario(semUsuario);
-      }
-    }
-    // Se o usuário não estiver logado, usa o avatar padrão
-    else {
-      setFotoPerfil(semFotoPerfil);
-    }
-  }, [usuarioLogado]);
+  }, [usuarioLogado, userPhoto, dataUserName]);
 
-  useEffect(() => {
-    const data = { usuario };
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-  }, [usuario]);
+  
 
   function onLogout() {
     logout().then(() => {
@@ -58,43 +39,37 @@ export default function NavBar() {
     });
   }
 
+  
   function toggleDropdown() {
     setShowDropdown((prevShowDropdown) => !prevShowDropdown);
   }
 
-  if (!mostrarNavbar) {
-    return null; // Retorna nulo para não exibir a barra de navegação
-  }
-
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="light"
+      variant="light"
+      className=""
+    >
       <Container>
-        <Navbar.Brand as={NavLink} to="/" className={'text-white'}>
-          <img
-            src={logo}
-            height="30"
-            className="d-inline-block align-top"
-            alt="React Bootstrap logo"
-          />
-        </Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/"></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto"></Nav>
-          <div className='welcome-container ms-auto'>
-            <i className={"bi bi-chat-left-heart-fill text-white"}></i>
-            <h6 className={'text-white'}>
-              Olá, {primeiroNome}!
-            </h6>
+          <div className="welcome-container ms-auto">
+            <i className="bi bi-chat-left-heart-fill"></i>
+            <h6>Olá, {primeiroNome}!</h6>
           </div>
           <Nav>
             <NavDropdown
               id="perfil-dropdown"
               title={
                 <img
-                  src={fotoPerfil}
+                  src={userPhoto}
                   width="32"
+                  height="32"
                   alt="fotoPerfil"
-                  className="rounded-circle"
+                  className="rounded-circle fotoPerfil"
                   id="fotoPerfil"
                 />
               }
@@ -106,14 +81,32 @@ export default function NavBar() {
             >
               <NavDropdown.Item id="/perfil">
                 <img
-                  src={fotoPerfil}
+                  src={userPhoto}
                   width="32"
+                  height="32"
                   alt="fotoPerfil"
-                  className="rounded-circle me-2"
+                  className="rounded-circle fotoPerfil"
                   id="fotoPerfil"
                 />
-                <h6>{usuario}</h6>
+                <h6 className="small-font">{usuario}</h6>
               </NavDropdown.Item>
+
+              {usuarioLogado && (
+                <>
+                  <NavDropdown.Item as={NavLink} to="/contas">
+                    <i className="ml-auto mt-auto bi bi-cash-coin small-font ">                      
+                      Contas
+                    </i>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/orcamento">
+                    <i className="ml-auto mt-auto bi bi-currency-exchange small-font">
+                      Orçamento
+                    </i>
+                  </NavDropdown.Item>
+                </>
+              )}
+              <NavDropdown.Divider />
+
               <NavDropdown.Item onClick={onLogout}>
                 <i className="bi bi-box-arrow-right"></i>
               </NavDropdown.Item>

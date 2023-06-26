@@ -1,86 +1,80 @@
-.Login.githubIcon {
-  border: none !important;
-  background-color: #0e0e0f  !important;
+/* Login.css */
 
-
-}
-.Login.btnLogin {
-  width: 250px !important;
-  border: none !important;
-  height: 50px;
-}
-
-
-#Login.gitIcon:hover {
-  background-color: #0a0a0ae3 !important;
+.login-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f8f8;
   
-} 
-.login-wrapper { /*Imagem de fundo da página*/ 
-  background-image: url("../../assets/images/Login.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-    background-position: center;
-    height: 100vh;
-    width: 100vw;
-  }
-
-.Login.text-center,
-h4, 
-.text-muted {
-  color: rgb(11, 11, 11);
-} /* Título da plataforma h4 */
-
-
-.Login.card-title {
-font-size: 10px;/*Card título*/
-
 }
 
-.Login.login-card p { /*Paragráfo*/
-font-size: 20px;
+.login-card {
+  width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-
-.button-login { /*button login *//*Meche com todos os button*/
-display: flex;
-justify-content: center;
-font-size: 14px;
-padding: 10px 20px; 
-display: inline-block;
-margin-bottom: 20px;
-text-align: center;
-}
-.login-card { /*Todo o Card */
-width: 310px; /* ajuste a largura do card conforme necessário */
-position: absolute;
-top: 30%; /* Altere o valor aqui para mover o card para baixo */
-left: -50%;
-height: 70%;
-transform: translate(-50%, -50%);
-}
-.login.mb-3 { /*redes Sociais*/
-border: none; 
-display: inline-block;
-text-align: center;
-font-size: 16px; 
+.login-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
-.mb-3.ms-2.githubIcon.btnLogin { /*button do github */
-background-color: #0e0e0f;
+.login-subtitle {
+  color: #777;
+  margin-bottom: 24px;
 }
-#button {
-box-shadow: 0px 0px 0px 3px rgba(40, 167, 69, 0.25);
+
+.login-form {
+  margin-bottom: 24px;
 }
-.login-wrapper {
-  position: relative;
+
+.login-form-label {
+  font-weight: bold;
+}
+
+.login-form-input {
+  margin-top: 8px;
+}
+
+.login-forgot-password {
+  color: #777;
+  text-decoration: none;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.login-google-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-top: 16px;
+  cursor: pointer;
 }
 
-.login-container {
-  position: relative;
-  top: -23%;
+.login-google-button img {
+  margin-right: 8px;
 }
+
+.login-footer {
+  text-align: center;
+  color: #777;
+}
+
+@media (max-width: 576px) {
+  .login-card {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+

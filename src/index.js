@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Importe do Bootstrap
 import App from './App';
 import './global.css'; // Importe do Global CSS
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

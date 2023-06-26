@@ -4,6 +4,10 @@ import { Modal, Button } from "react-bootstrap";
 import Alert from './Alert';
 import "./Orcamento.css";
 import { Grafico } from './CustomChart';
+import { CategoryScale } from 'chart.js';
+import Chart from 'chart.js/auto';
+
+Chart.register(CategoryScale);
 
 const Orcamento = () => {
   const [items, setItems] = useState([]);
